@@ -13,14 +13,17 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 @dataclass
 class DataTransformationConfig:
-    preprocessor_obj_file_path=os.path.join('artifacts',"proprocessor.pkl")
+    preprocessor_obj_file_path=os.path.join('artifacts',"preprocessor.pkl")
 
 class DataTransformation:
     def __init__(self):
         self.data_transformation_config=DataTransformationConfig()
 
     def get_data_transformer_object(self):
+        '''
+        This function si responsible for data trnasformation
         
+        '''
         try:
             numerical_columns = ["writing_score", "reading_score"]
             categorical_columns = [
@@ -82,10 +85,10 @@ class DataTransformation:
             target_column_name="math_score"
             numerical_columns = ["writing_score", "reading_score"]
 
-            input_feature_train_df=train_df.drop(columns=[target_column_name])
+            input_feature_train_df=train_df.drop(columns=[target_column_name],axis=1)
             target_feature_train_df=train_df[target_column_name]
 
-            input_feature_test_df=test_df.drop(columns=[target_column_name])
+            input_feature_test_df=test_df.drop(columns=[target_column_name],axis=1)
             target_feature_test_df=test_df[target_column_name]
 
             logging.info(
@@ -116,6 +119,7 @@ class DataTransformation:
             )
         except Exception as e:
             raise CustomException(e,sys)
+
 '''
 @dataclass
 class DataTransformationConfig:

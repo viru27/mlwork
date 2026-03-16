@@ -6,10 +6,11 @@ import os
 
 
 class PredictPipeline:
-     def __init__(self):
-          pass
-     def predict(self,features):
-          try:
+    def __init__(self):
+        pass
+
+    def predict(self,features):
+        try:
             model_path=os.path.join("artifacts","model.pkl")
             preprocessor_path=os.path.join('artifacts','preprocessor.pkl')
             print("Before Loading")
@@ -19,15 +20,15 @@ class PredictPipeline:
             data_scaled=preprocessor.transform(features)
             preds=model.predict(data_scaled)
             return preds
-            
-          except Exception as e:
-              raise CustomException(e,sys)
+        
+        except Exception as e:
+            raise CustomException(e,sys)
 
 
 
 #this class is responsible for mapping all the inputs we are giving value in the html
 class CustomData:
-    def __init__(  self,
+    def __init__(self,
         gender: str,
         race_ethnicity: str,
         parental_level_of_education,
